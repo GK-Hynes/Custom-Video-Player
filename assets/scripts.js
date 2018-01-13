@@ -72,7 +72,7 @@ function toggleFullscreen(e) {
 
 function toggleFullscreenClasses() {
   player.classList.toggle("fullscreen");
-  isFullScreen = !isFullScreen;
+  isFullscreen = !isFullscreen;
 }
 
 // Hook up event listeners
