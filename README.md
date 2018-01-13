@@ -2,7 +2,7 @@
 
 A custom interface for the standard HTML5 video player. Built for Wes Bos' [JavaScript 30](https://javascript30.com/) course.
 
-[![Screenshot of custom HTML5 video player](https://res.cloudinary.com/gerhynes/image/upload/v1515875879/customVideoPlayer_qi5wft.jpg)](https://gk-hynes.github.io/custom-video-player/)
+[![Screenshot of custom HTML5 video player](https://res.cloudinary.com/gerhynes/image/upload/v1515881605/customVideoPlayer1_tuqcjs.jpg)](https://gk-hynes.github.io/custom-video-player/)
 
 ## Notes
 
@@ -38,13 +38,13 @@ video.addEventListener("play", updateButton);
 video.addEventListener("pause", updateButton);
 ```
 
-Make a function `skip`. Listen for a click on anyhing that has a `data-skip` attribute i.e. the skip buttons.
+Make a function `skip`. Listen for a click on anyhing that has a `data-skip` attribute, i.e. the skip buttons.
 
 Take `this.dataset.skip`, use `parseFloat` to convert it from a string to a number, and then add it to `video.currentTime`.
 
-Make a function `handleRangeUpdate` and listen for a change event or a mousemove event on each of the `ranges`.
+Make a function, `handleRangeUpdate`, and listen for a change event or a mousemove event on each of the `ranges`.
 
-Inside `handleRangeUpdate` set `video[this.name]` to be`this.value` i.e. the value bein gentered from the sliders.
+Inside `handleRangeUpdate` set `video[this.name]` to be `this.value` i.e. the value being entered from the sliders.
 
 Make a function `handleProgress`. Set the variable `percent` to `(video.currentTime / video.duration) * 100`.
 
@@ -60,10 +60,24 @@ Make a function `scrub`, listen for a click on the progress bar and when that ha
 
 Set a variable `scrubTime` equal to `e.offsetX / progress.offsetWidth * video.duration`. Then update `video.currentTime` to equal `scrubTime`.
 
-Create a variable `mousedown` equal to `false`. When someone mouses down set it to `true` and when they mouse up set it equal to `false`.
+So that `scrub` only runs when the progress bar is dragged, create a variable `mousedown` equal to `false`. When someone mouses down set it to `true` and when they mouse up set it equal to `false`.
 
 Listen for a mousemove event on the progrss bar, check if mousedown is `true` and, if it is, run `scrub`.
 
 ```js
 progress.addEventListener("mousemove", e => mousedown && scrub(e));
 ```
+
+### Fullscreen mode
+
+Thanks to Vince Aggrippino for this fullscreen [solution](https://codepen.io/VAggrippino/pen/vgZdaw).
+
+Add a button with a class of `fullscreen`.
+
+Make two functions, `toggleFullscreen` and `toggleFullscreenClasses`, and a variable `isFullscreen`, initially set to `false`.
+
+In `toggleFullscreen`, if `isFullscreen` is `true` check if the `document.exitFullscreen` method is available and run it. Otherwise run the browser-specific equivalent. If `isFullscreen` is `false`, run `player.requestFullscreen` (or the browser-specific equivalent).
+
+In `toggleFullscreenClasses`, toggle the fullscreen class on the player and set `isFullscreen` to `!isFullscreen`.
+
+Listen for a fullscreenchange (and each browswer's implementation of it) and run `toggleFullscreenClasses`.

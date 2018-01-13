@@ -38,7 +38,7 @@ function scrub(e) {
   console.log(e);
 }
 
-//  Thanks to Vince Aggripino for this solution
+//  Thanks to Vince Aggrippino for this solution
 let isFullscreen = false;
 
 function toggleFullscreen(e) {
